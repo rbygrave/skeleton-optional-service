@@ -1,5 +1,24 @@
 # skeleton-optional-service
 
+Q: If a future Java supported multiple module definitions in a single jar would
+this support the "Optional Service" pattern which today works in classpath
+but fails in module-path at runtime during module resolution.
+
+A: Yes it would
+
+### Known Workarounds today
+- Do not use ServiceLoader
+- Use a separate jar for the plugin
+  - Make users aware of this require them to explicitly include the dependency
+  - Make a maven composite dependency (of lib.y and lib.y.xplugin, now have 3 maven dependencies)
+  - *Make lib.y.xplugin and transitive dependency of lib.y (and employ a workaround for the maven cyclical dependency)
+
+
+### *Make lib.y.xplugin and transitive dependency of lib.y
+
+This is what most closely matches a single jar with 2 modules.
+
+
 ### lib.x
 ```java
 module lib.x {
